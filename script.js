@@ -1,31 +1,37 @@
-const input=document.getElementById("imageInput");
+const input = document.getElementById("imageInput");
+const preview = document.getElementById("preview");
+const status = document.getElementById("status");
 
-const preview=document.getElementById("preview");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
-const status=document.getElementById("status");
+input.addEventListener("change", function () {
 
-input.addEventListener("change",function(){
+    const file = this.files[0];
 
-const file=this.files[0];
+    if (!file) return;
 
-if(!file)return;
+    const img = new Image();
 
-preview.src=URL.createObjectURL(file);
+    img.onload = function () {
 
-preview.style.display="block";
+        preview.src = img.src;
+        preview.style.display = "block";
 
-status.innerText="Image Loaded";
+        ctx.clearRect(0,0,128,128);
+
+        ctx.drawImage(img,0,0,128,128);
+
+        status.innerText = "Image Loaded Successfully";
+
+    };
+
+    img.src = URL.createObjectURL(file);
 
 });
 
 function convertImage(){
 
-status.innerText="Converting...";
-
-setTimeout(()=>{
-
-status.innerText="Done! (Image Processing Coming Soon)";
-
-},1000);
+    status.innerText = "Preparing Image...";
 
 }
