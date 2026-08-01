@@ -45,3 +45,9 @@ border-radius:8px;
 margin-top:20px;
 
 }
+canvas{
+    margin-top:20px;
+    border:2px solid white;
+    max-width:90%;
+    image-rendering:pixelated;
+}
